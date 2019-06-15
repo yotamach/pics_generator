@@ -1,0 +1,18 @@
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <h2>Pics Generator</h2>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+  <span class="example-spacer"></span>
+    <button mat-raised-button color="accent" (click)="generatePics()">Generate new photos</button>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+  <div *ngIf="isLoading" fxFlex="100%">
+      <mat-spinner></mat-spinner>
+  </div>
+  <div fxFlex="0 1 calc(25% - 32px)" *ngFor="let pic of pics">
+    <app-pic [picture]="pic"></app-pic>
+  </div>
+</div>
