@@ -3,16 +3,24 @@
     <h2>Pics Generator</h2>
   </mat-toolbar-row>
   <mat-toolbar-row>
-  <span class="example-spacer"></span>
-    <button mat-raised-button color="accent" (click)="generatePics()">Generate new photos</button>
-
+    <button mat-raised-button color="accent" (click)="generatePics()">Update</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-form-field>
+      <input matInput placeholder="Please enter a key" value="" [(ngModel)]="searchField">
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="searchPics()">Search</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-radio-group [(ngModel)]="greyScaleEnable" (change)="changePicsVisual()">
+      <mat-radio-button [value]="false">None</mat-radio-button>
+      <mat-radio-button [value]="true">Greyscale</mat-radio-button>
+    </mat-radio-group>
   </mat-toolbar-row>
 </mat-toolbar>
 <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
   <div *ngIf="isLoading" fxFlex="100%">
-      <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
   </div>
-  <div fxFlex="0 1 calc(25% - 32px)" *ngFor="let pic of pics">
+  <div class="pic_col" fxFlex="0 1 calc(25% - 32px)" *ngFor="let pic of pics">
     <app-pic [picture]="pic"></app-pic>
   </div>
 </div>

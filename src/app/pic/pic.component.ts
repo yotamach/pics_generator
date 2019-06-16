@@ -13,7 +13,7 @@ export class PicComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.picture);
+
   }
 
 }

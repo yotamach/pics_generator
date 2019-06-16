@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   title = 'PicsGenerator';
   pics: Pic[] = [];
   private picsSub: Subscription;
+  searchField: String = '';
+  greyScaleEnable: boolean = false;
   isLoading: boolean;
   ngOnInit() {
     this.isLoading = true;
@@ -33,4 +35,24 @@ export class AppComponent implements OnInit {
       this.pics = picsData;
     });
   }
+
+  searchPics(){
+    console.log(this.searchField);
+  }
+
+  changePicsVisual(){
+    console.log(this.greyScaleEnable);
+    if(this.greyScaleEnable){
+      this.pics = this.pics.map((pic) => {
+        return { author: pic.author , url: pic.url + '?grayscale' };
+      });
+      console.log(this.pics);
+    }else{
+      this.pics = this.pics.map((pic) => {
+        return { author: pic.author , url: pic.url.replace('?grayscale', '') };
+      });
+      console.log(this.pics);
+    }
+  }
+
 }
