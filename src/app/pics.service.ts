@@ -39,4 +39,26 @@ export class PicsService {
     return this.picsUpdated.asObservable();
   }
 
+  getGrayscalePics(greyScaleEnable: boolean) {
+    let grayscalePics = [];
+    if(greyScaleEnable){
+      grayscalePics = this.pics.map((pic) => {
+        return { author: pic.author , url: pic.url + '?grayscale' };
+      });
+    }else{
+      grayscalePics = this.pics.map((pic) => {
+        return { author: pic.author , url: pic.url.replace('?grayscale', '') };
+      });
+    }
+    this.picsUpdated.next(grayscalePics);
+  }
+
+  getSearchedPics(keyword){
+    let filteredPics = [];
+    filteredPics = this.pics.filter((pic) => {
+      return (pic.author).includes(keyword);
+    });
+    this.picsUpdated.next(filteredPics);
+  }
+
 }

@@ -29,30 +29,17 @@ export class AppComponent implements OnInit {
   generatePics(){
     this.isLoading = true;
     this.picsService.getPics();
-    this.picsSub = this.picsService.getPicsUpdatedListener()
-    .subscribe((picsData: Pic[]) => {
-      this.isLoading = false;
-      this.pics = picsData;
-    });
   }
 
   searchPics(){
-    console.log(this.searchField);
+    if(this.searchField === '') {
+      alert ("Please enter a value!");  
+    }
+    this.picsService.getSearchedPics(this.searchField);
   }
 
   changePicsVisual(){
-    console.log(this.greyScaleEnable);
-    if(this.greyScaleEnable){
-      this.pics = this.pics.map((pic) => {
-        return { author: pic.author , url: pic.url + '?grayscale' };
-      });
-      console.log(this.pics);
-    }else{
-      this.pics = this.pics.map((pic) => {
-        return { author: pic.author , url: pic.url.replace('?grayscale', '') };
-      });
-      console.log(this.pics);
-    }
+    this.picsService.getGrayscalePics(this.greyScaleEnable);
   }
 
 }
