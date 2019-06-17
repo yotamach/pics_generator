@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   isLoading: boolean;
   ngOnInit() {
     this.isLoading = true;
-    this.picsService.getPics();
+    this.picsService.getPics(this.greyScaleEnable);
     this.picsSub = this.picsService.getPicsUpdatedListener()
     .subscribe((picsData: Pic[]) => {
       this.isLoading = false;
