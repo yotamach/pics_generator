@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
 
   searchPics(){
     this.picsService.getSearchedPics(this.searchField);
+    this.searchField = '';
   }
 
   changePicsVisual(){

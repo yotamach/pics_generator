@@ -60,7 +60,7 @@ export class PicsService {
       this.displayedPics = this.pics;
     }
     this.displayedPics = this.displayedPics.filter((pic) => {
-      return (pic.author).includes(keyword);
+      return (pic.author).split(' ').includes(keyword);
     });
     this.picsUpdated.next(this.displayedPics);
   }
