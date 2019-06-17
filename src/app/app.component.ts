@@ -32,9 +32,6 @@ export class AppComponent implements OnInit {
   }
 
   searchPics(){
-    if(this.searchField === '') {
-      alert ("Please enter a value!");  
-    }
     this.picsService.getSearchedPics(this.searchField);
   }
 

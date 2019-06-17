@@ -12,7 +12,7 @@ export class PicsService {
   constructor(private httpClient: HttpClient) { }
   pics: Pic[] = [];
   private picsUpdated = new Subject<Pic[]>();
-
+  displayedPics: Pic[] = [];
   getPics(){
     let page = Math.floor(Math.random() * (33 - 1) ) + 1;
     this.httpClient.get<any>('https://picsum.photos/v2/list?page=' + page)
@@ -28,6 +28,7 @@ export class PicsService {
     )
     .subscribe((transformedPics) => {
         this.pics = transformedPics;
+        this.displayedPics = this.pics;
         this.picsUpdated.next(this.pics);
 
       }
@@ -40,25 +41,26 @@ export class PicsService {
   }
 
   getGrayscalePics(greyScaleEnable: boolean) {
-    let grayscalePics = [];
     if(greyScaleEnable){
-      grayscalePics = this.pics.map((pic) => {
+      this.displayedPics = this.displayedPics.map((pic) => {
         return { author: pic.author , url: pic.url + '?grayscale' };
       });
     }else{
-      grayscalePics = this.pics.map((pic) => {
+      this.displayedPics = this.displayedPics.map((pic) => {
         return { author: pic.author , url: pic.url.replace('?grayscale', '') };
       });
     }
-    this.picsUpdated.next(grayscalePics);
+    this.picsUpdated.next(this.displayedPics);
   }
 
   getSearchedPics(keyword){
-    let filteredPics = [];
-    filteredPics = this.pics.filter((pic) => {
+    if(keyword === ''){
+      this.displayedPics = this.pics;
+    }
+    this.displayedPics = this.displayedPics.filter((pic) => {
       return (pic.author).includes(keyword);
     });
-    this.picsUpdated.next(filteredPics);
+    this.picsUpdated.next(this.displayedPics);
   }
 
 }
