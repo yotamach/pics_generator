@@ -13,7 +13,8 @@ export class PicsService {
   pics: Pic[] = [];
   private picsUpdated = new Subject<Pic[]>();
   displayedPics: Pic[] = [];
-  getPics(){
+
+  getPics(greyScaleEnable){
     let page = Math.floor(Math.random() * (33 - 1) ) + 1;
     this.httpClient.get<any>('https://picsum.photos/v2/list?page=' + page)
     .pipe(
@@ -22,7 +23,8 @@ export class PicsService {
           var urlArr = pic.download_url.split('/');
           urlArr.pop();
           urlArr.pop();
-          return { author: pic.author , url: urlArr.join('/') + '/300' }
+          let gSstr = greyScaleEnable ? '?grayscale' : '';
+          return { author: pic.author , url: urlArr.join('/') + '/300' + gSstr }
         })
       })
     )

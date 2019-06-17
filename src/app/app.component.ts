@@ -27,8 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   generatePics(){
-    this.isLoading = true;
-    this.picsService.getPics();
+    this.picsService.getPics(this.greyScaleEnable);
   }
 
   searchPics(){
