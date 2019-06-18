@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Pic } from './pic/pic.model';
 import { PicsService } from './pics.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,7 @@ export class AppComponent implements OnInit {
   searchField: String = '';
   greyScaleEnable: boolean = false;
   isLoading: boolean;
+  namesToSearch = []; 
   ngOnInit() {
     this.isLoading = true;
     this.picsService.getPics(this.greyScaleEnable);
@@ -23,8 +26,11 @@ export class AppComponent implements OnInit {
     .subscribe((picsData: Pic[]) => {
       this.isLoading = false;
       this.pics = picsData;
+      this.namesToSearch = picsData.map((pic) => { return pic.author; });
     });
+
   }
+
 
   generatePics(){
     this.picsService.getPics(this.greyScaleEnable);

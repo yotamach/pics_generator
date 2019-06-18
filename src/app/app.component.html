@@ -7,7 +7,7 @@
   </mat-toolbar-row>
   <mat-toolbar-row>
     <mat-form-field>
-      <input matInput placeholder="Please enter a key" value="" [(ngModel)]="searchField">
+      <input type="text" placeholder="Please enter a key" value="" [(ngModel)]="searchField" matInput>
     </mat-form-field>
     <button mat-raised-button color="accent" (click)="searchPics()">Search</button>
     <mat-divider [vertical]="true"></mat-divider>
