@@ -10,6 +10,8 @@
       <input matInput placeholder="Please enter a key" value="" [(ngModel)]="searchField">
     </mat-form-field>
     <button mat-raised-button color="accent" (click)="searchPics()">Search</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button mat-raised-button color="accent" (click)="showAllPics()">Show all</button>
   </mat-toolbar-row>
   <mat-toolbar-row>
     <div fxFlex="100">

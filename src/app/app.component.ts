@@ -31,12 +31,19 @@ export class AppComponent implements OnInit {
   }
 
   searchPics(){
+    if(this.searchField === ''){
+      alert('There is no key entered to search!');
+      return;
+    }
     this.picsService.getSearchedPics(this.searchField);
     this.searchField = '';
   }
 
   changePicsVisual(){
     this.picsService.getGrayscalePics(this.greyScaleEnable);
+  }
+  showAllPics(){
+    this.picsService.getAllDisplayedList(this.greyScaleEnable);
   }
 
 }

@@ -56,13 +56,14 @@ export class PicsService {
   }
 
   getSearchedPics(keyword){
-    if(keyword === ''){
-      this.displayedPics = this.pics;
-    }
     this.displayedPics = this.displayedPics.filter((pic) => {
-      return (pic.author).split(' ').includes(keyword);
+      return (pic.author).includes(keyword);
     });
     this.picsUpdated.next(this.displayedPics);
   }
 
+  getAllDisplayedList(greyScaleEnable: boolean){
+    this.displayedPics = this.pics;
+    this.getGrayscalePics(greyScaleEnable);
+  }
 }
