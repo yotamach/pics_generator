@@ -6,9 +6,18 @@
     <button mat-raised-button color="accent" (click)="generatePics()">Update</button>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <mat-form-field>
-      <input type="text" placeholder="Please enter a key" value="" [(ngModel)]="searchField" matInput>
-    </mat-form-field>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input type="text" [(ngModel)]="searchField" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
     <button mat-raised-button color="accent" (click)="searchPics()">Search</button>
     <mat-divider [vertical]="true"></mat-divider>
     <button mat-raised-button color="accent" (click)="showAllPics()">Show all</button>

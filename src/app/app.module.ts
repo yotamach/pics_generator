@@ -6,10 +6,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatToolbarModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatInputModule, MatDividerModule, MatRadioModule, MatAutocompleteModule } from '@angular/material';
+import {MatAutocompleteModule , MatToolbarModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatInputModule, MatDividerModule, MatRadioModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PicComponent } from './pic/pic.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

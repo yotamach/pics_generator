@@ -5,6 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +19,10 @@ export class AppComponent implements OnInit {
   searchField: String = '';
   greyScaleEnable: boolean = false;
   isLoading: boolean;
-  namesToSearch = []; 
+  namesToSearch = [];
+  myControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+
   ngOnInit() {
     this.isLoading = true;
     this.picsService.getPics(this.greyScaleEnable);
@@ -28,6 +32,11 @@ export class AppComponent implements OnInit {
       this.pics = picsData;
       this.namesToSearch = picsData.map((pic) => { return pic.author; });
     });
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
 
   }
 
@@ -52,4 +61,9 @@ export class AppComponent implements OnInit {
     this.picsService.getAllDisplayedList(this.greyScaleEnable);
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.namesToSearch.filter(nameToSearch => nameToSearch.toLowerCase().indexOf(filterValue) === 0);
+  }
 }
